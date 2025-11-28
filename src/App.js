@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Auth } from "aws-amplify";
+import { getCurrentUser } from "aws-amplify/auth";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 
@@ -9,7 +9,7 @@ function App({ signOut, user }) {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const currentUser = await Auth.currentAuthenticatedUser();
+        const currentUser = await getCurrentUser();
         setAttributes(currentUser.attributes);
       } catch (e) {
         console.log("Not logged in", e);
